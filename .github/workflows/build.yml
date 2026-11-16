@@ -1,0 +1,23 @@
+name: Compilar Executável Windows
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Copiar código do repositório
+      uses: actions/checkout@v4
+
+    - name: Compilar o projeto
+      run: |
+        g++ main.cpp Aluno.cpp Encarregado.cpp GestorEscola.cpp -o sistema.exe
+
+    - name: Guardar o Executável (.exe) como Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: executavel-windows
+        path: sistema.exe
